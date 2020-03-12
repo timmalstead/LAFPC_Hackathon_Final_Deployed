@@ -52,7 +52,7 @@ class Affordable extends Component {
 
   getData = async () => {
     try {
-      const data = await fetch(`http://localhost:3030/data/get-data`, {
+      const data = await fetch(`/data/get-data`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -73,17 +73,14 @@ class Affordable extends Component {
 
   addData = async data => {
     try {
-      const addDataResponse = await fetch(
-        `http://localhost:3030/data/add-data`,
-        {
-          method: "POST",
-          credentials: "include",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json"
-          }
+      const addDataResponse = await fetch(`/data/add-data`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
         }
-      )
+      })
       const parsedResponse = await addDataResponse.json()
       this.setState({
         affordableData: [...this.state.affordableData, parsedResponse.data]
@@ -106,7 +103,7 @@ class Affordable extends Component {
     e.preventDefault()
     try {
       const editRequest = await fetch(
-        `http://localhost:3030/data/${this.state.editData._id}/update-data`,
+        `/data/${this.state.editData._id}/update-data`,
         {
           method: "PUT",
           credentials: "include",
@@ -152,7 +149,7 @@ class Affordable extends Component {
 
   delete = async id => {
     try {
-      const deleteData = await fetch(`http://localhost:3030/data/${id}`, {
+      const deleteData = await fetch(`/data/${id}`, {
         method: "DELETE",
         credentials: "include"
       })

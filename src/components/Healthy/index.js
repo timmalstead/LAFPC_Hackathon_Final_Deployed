@@ -51,7 +51,7 @@ class Healthy extends Component {
 
   getData = async () => {
     try {
-      const data = await fetch(`http://localhost:3030/data/get-data`, {
+      const data = await fetch(`/data/get-data`, {
         method: "GET",
         credentials: "include",
         headers: {
@@ -70,17 +70,14 @@ class Healthy extends Component {
 
   addData = async data => {
     try {
-      const addDataResponse = await fetch(
-        `http://localhost:3030/data/add-data`,
-        {
-          method: "POST",
-          credentials: "include",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json"
-          }
+      const addDataResponse = await fetch(`/data/add-data`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
         }
-      )
+      })
       const parsedResponse = await addDataResponse.json()
       this.setState({
         healthyData: [...this.state.healthyData, parsedResponse.data]
@@ -103,7 +100,7 @@ class Healthy extends Component {
     e.preventDefault()
     try {
       const editRequest = await fetch(
-        `http://localhost:3030/data/${this.state.editData._id}/update-data`,
+        `/data/${this.state.editData._id}/update-data`,
         {
           method: "PUT",
           credentials: "include",
@@ -149,7 +146,7 @@ class Healthy extends Component {
 
   delete = async id => {
     try {
-      const deleteData = await fetch(`http://localhost:3030/data/${id}`, {
+      const deleteData = await fetch(`/data/${id}`, {
         method: "DELETE",
         credentials: "include"
       })

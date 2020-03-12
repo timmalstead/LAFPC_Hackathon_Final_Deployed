@@ -49,17 +49,14 @@ class App extends Component {
 
   register = async data => {
     try {
-      const registerResponse = await fetch(
-        `http://localhost:3030/admin/register-admin`,
-        {
-          method: "POST",
-          credentials: "include",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json"
-          }
+      const registerResponse = await fetch(`/admin/register-admin`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json"
         }
-      )
+      })
       const parsedResponse = await registerResponse.json()
       localStorage.setItem("admin", parsedResponse.data.username)
       localStorage.setItem("loggedIn", true)
@@ -75,17 +72,14 @@ class App extends Component {
 
   login = async loginInfo => {
     try {
-      const loginResponse = await fetch(
-        `http://localhost:3030/admin/login-admin`,
-        {
-          method: "POST",
-          credentials: "include",
-          body: JSON.stringify(loginInfo),
-          headers: {
-            "Content-Type": "application/json"
-          }
+      const loginResponse = await fetch(`/admin/login-admin`, {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify(loginInfo),
+        headers: {
+          "Content-Type": "application/json"
         }
-      )
+      })
       const parsedResponse = await loginResponse.json()
       localStorage.setItem(
         "admin",
@@ -109,7 +103,7 @@ class App extends Component {
 
   logout = async () => {
     try {
-      fetch(`http://localhost:3030/admin/logout-admin`).then(res => {
+      fetch(`/admin/logout-admin`).then(res => {
         this.setState({
           isLogged: false
         })
